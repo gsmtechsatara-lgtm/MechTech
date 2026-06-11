@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: customer-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/customer-service
+    username: AcmeInfi
+    password: ProteasLankans
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none   # or validate / none / create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: false
+  server:
+    port: 8080  #8088
+    ssl:
+      enabled: false
+      key-store: classpath:tv.jks
+      key-store-password: password
+      keyStoreType: JKS
+      protocol: TLS
