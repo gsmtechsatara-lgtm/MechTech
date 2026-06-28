@@ -13,6 +13,7 @@
 
     <modules>
         <module>customer-service</module>
+        <module>document-service</module>
     </modules>
 
     <properties>
