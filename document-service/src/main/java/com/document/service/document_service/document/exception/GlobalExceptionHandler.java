@@ -52,14 +52,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse<Object>> handleGeneric(HttpServletRequest req, Exception ex) {
-        ApiResponse<Object> response = ApiResponse.builder()
-                .success(false)
-                .message("Internal server error")
-                .data(null)
-                .build();
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-    }
+   @ExceptionHandler(Exception.class)
+public ResponseEntity<ApiResponse<String>> handleException(Exception ex) {
+
+    ex.printStackTrace();
+
+    return ResponseEntity.internalServerError()
+            .body(ApiResponse.<String>builder()
+                    .success(false)
+                    .message(ex.toString())
+                    .data(null)
+                    .build());
+}
 }
 

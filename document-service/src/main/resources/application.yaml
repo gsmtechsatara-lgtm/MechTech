@@ -1,11 +1,17 @@
 spring:
   application:
     name: document-service
+
+  cloud:
+    discovery:
+      enabled: true
+
   datasource:
     url: jdbc:mysql://localhost:3306/document-service
     username: AcmeInfi
     password: ProteasLankans
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     hibernate:
       ddl-auto: none
@@ -13,13 +19,18 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: false
 
-  server:
-    port: 8081
-
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+server:
+  port: 8081
 
 document-service:
   storage:

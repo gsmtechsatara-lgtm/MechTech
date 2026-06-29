@@ -44,7 +44,7 @@ public class CustomerController {
 
     @PutMapping(ApiConstants.UPDATE_CUSTOMER)
     public ResponseEntity<ApiResponse<CustomerResponse>> updateCustomer(
-            @PathVariable Long customerCode,
+            @PathVariable ("customerCode")  Long customerCode,
             @Valid @RequestBody UpdateCustomerRequest request) {
         CustomerResponse updated = customerService.updateCustomer(customerCode, request);
         return ResponseEntity.ok(
@@ -57,7 +57,7 @@ public class CustomerController {
     }
 
     @DeleteMapping(ApiConstants.DELETE_CUSTOMER)
-    public ResponseEntity<ApiResponse<Object>> deleteCustomer(@PathVariable Long customerCode) {
+    public ResponseEntity<ApiResponse<Object>> deleteCustomer(@PathVariable("customerCode")  Long customerCode) {
 
         customerService.deleteCustomer(customerCode);
         return ResponseEntity.ok(
@@ -70,7 +70,7 @@ public class CustomerController {
     }
 
     @GetMapping(ApiConstants.GET_CUSTOMER)
-    public ResponseEntity<ApiResponse<CustomerResponse>> getCustomer(@PathVariable Long customerCode) {
+    public ResponseEntity<ApiResponse<CustomerResponse>> getCustomer(@PathVariable ("customerCode")  Long customerCode) {
         CustomerResponse customer = customerService.getCustomer(customerCode);
         return ResponseEntity.ok(
                 ApiResponse.<CustomerResponse>builder()
@@ -81,16 +81,19 @@ public class CustomerController {
         );
     }
 
-    @GetMapping(ApiConstants.GET_CUSTOMER_LIST)
-    public ResponseEntity<ApiResponse<List<CustomerResponse>>> getCustomersByMerchant(@RequestParam Long merchantId) {
-        List<CustomerResponse> customers = customerService.getCustomersByMerchant(merchantId);
-        return ResponseEntity.ok(
-                ApiResponse.<List<CustomerResponse>>builder()
-                        .success(true)
-                        .message("Customers fetched successfully")
-                        .data(customers)
-                        .build()
-        );
-    }
+   @GetMapping(ApiConstants.GET_CUSTOMER_LIST)
+public ResponseEntity<ApiResponse<List<CustomerResponse>>> getCustomersByMerchant(
+        @RequestParam("merchantId") Long merchantId) {
+
+    List<CustomerResponse> customers = customerService.getCustomersByMerchant(merchantId);
+
+    return ResponseEntity.ok(
+            ApiResponse.<List<CustomerResponse>>builder()
+                    .success(true)
+                    .message("Customers fetched successfully")
+                    .data(customers)
+                    .build()
+    );
+}
 }
 

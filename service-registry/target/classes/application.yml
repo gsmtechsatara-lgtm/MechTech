@@ -1,0 +1,38 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: service-registry
+
+# Eureka Server configuration
+eureka:
+  client:
+    # As a server, we do not register ourselves with Eureka.
+    register-with-eureka: false
+    # As a server, we do not need to fetch the registry from another Eureka.
+    fetch-registry: false
+
+  instance:
+    # Recommended to make logs/UI show correct host/IP.
+    prefer-ip-address: true
+    hostname: localhost
+
+# Expose actuator endpoints (health, info, etc.)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+  endpoint:
+    health:
+      show-details: always
+
+# Optional but useful: add simple info to /actuator/info
+info:
+  application:
+    name: ${spring.application.name}
+    description: "MechTech Service Discovery (Eureka Server)"
+    version: "1.0.0"
+
