@@ -134,7 +134,7 @@ public class JobCardServiceImpl implements JobCardService {
         existing.setAssignedMechanicId(request.getAssignedMechanicId());
         existing.setPriority(request.getPriority());
         existing.setPaymentStatus(request.getPaymentStatus() != null ? request.getPaymentStatus() : existing.getPaymentStatus());
-        existing.setStatus(request.getStatus());
+        existing.setStatus(request.getStatus() != null ? request.getStatus() : JobCardStatus.OPEN);
         existing.setNotes(request.getNotes());
         existing.setUpdatedAt(request.getUpdatedAt() != null ? request.getUpdatedAt() : LocalDateTime.now());
         existing.setUpdatedBy(request.getUpdatedBy() != null ? request.getUpdatedBy() : existing.getUpdatedBy());

@@ -19,5 +19,6 @@ public interface JobCardRepository extends JpaRepository<JobCard, Long> {
     List<JobCard> findByStatus(JobCardStatus status);
 
     boolean existsByJobCardNumber(String jobCardNumber);
+    
 }
 

@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,7 +46,8 @@ public class DocumentController {
     } */
 
     @GetMapping(ApiConstants.GET_DOCUMENT)
-    public ResponseEntity<ApiResponse<DocumentResponse>> getDocument(@PathVariable Long documentId) {
+    public ResponseEntity<ApiResponse<DocumentResponse>> getDocument(@PathVariable("documentId") Long documentId) {
+
         DocumentResponse response = documentService.getDocument(documentId);
         return ResponseEntity.ok(ApiResponse.<DocumentResponse>builder()
                 .success(true)
@@ -58,8 +58,9 @@ public class DocumentController {
 
     @GetMapping(ApiConstants.GET_BY_REFERENCE)
     public ResponseEntity<ApiResponse<List<DocumentResponse>>> getDocumentsByReference(
-            @RequestParam Long referenceId,
-            @RequestParam String moduleName) {
+            @RequestParam("referenceId") Long referenceId,
+            @RequestParam("moduleName") String moduleName) {
+
 
         List<DocumentResponse> response = documentService.getDocuments(referenceId, moduleName);
         return ResponseEntity.ok(ApiResponse.<List<DocumentResponse>>builder()
@@ -71,7 +72,8 @@ public class DocumentController {
 
     @PutMapping(ApiConstants.UPDATE_DOCUMENT)
     public ResponseEntity<ApiResponse<DocumentResponse>> updateDocument(
-            @PathVariable Long documentId,
+            @PathVariable("documentId") Long documentId,
+
             @RequestPart("file") MultipartFile file) {
 
         DocumentResponse updated = documentService.updateDocument(documentId, file);

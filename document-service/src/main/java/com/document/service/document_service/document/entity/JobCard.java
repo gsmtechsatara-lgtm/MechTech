@@ -2,6 +2,8 @@ package com.document.service.document_service.document.entity;
 
 import com.document.service.document_service.document.comman.JobCardStatus;
 import jakarta.persistence.*;
+
+import com.document.service.document_service.document.converter.JobCardStatusConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +28,7 @@ public class JobCard {
     private Long customerId;
     private Long vehicleId;
     private String jobCardNumber;
+    @Convert(converter = JobCardStatusConverter.class)
     private JobCardStatus status;
     private String complaint;
     private String diagnosis;

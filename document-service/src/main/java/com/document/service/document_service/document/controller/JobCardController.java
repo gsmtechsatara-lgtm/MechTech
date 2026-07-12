@@ -1,8 +1,6 @@
 package com.document.service.document_service.document.controller;
 
 import com.document.service.document_service.document.comman.JobCardApiConstants;
-import com.document.service.document_service.document.comman.JobCardStatus;
-
 
 import com.document.service.document_service.document.dto.request.CreateJobCardRequest;
 import com.document.service.document_service.document.dto.request.UpdateJobCardRequest;
@@ -39,8 +37,7 @@ public class JobCardController {
     }
 
     @GetMapping(JobCardApiConstants.GET_JOB_CARD)
-
-    public ResponseEntity<ApiResponse<JobCardResponse>> getJobCard(@PathVariable Long jobCardId) {
+    public ResponseEntity<?> getJobCardById(@PathVariable("jobCardId") Long jobCardId) {
         JobCardResponse response = jobCardService.getJobCard(jobCardId);
         return ResponseEntity.ok(ApiResponse.<JobCardResponse>builder()
                 .success(true)
@@ -62,7 +59,8 @@ public class JobCardController {
 
     @GetMapping(JobCardApiConstants.GET_JOB_CARDS_BY_CUSTOMER)
 
-    public ResponseEntity<ApiResponse<List<JobCardResponse>>> getJobCardsByCustomer(@PathVariable Long customerId) {
+   public ResponseEntity<ApiResponse<List<JobCardResponse>>> getJobCardsByCustomer(
+        @PathVariable("customerId") Long customerId) {
         List<JobCardResponse> responses = jobCardService.getJobCardsByCustomerId(customerId);
         return ResponseEntity.ok(ApiResponse.<List<JobCardResponse>>builder()
                 .success(true)
@@ -71,9 +69,9 @@ public class JobCardController {
                 .build());
     }
 
-    @GetMapping(JobCardApiConstants.GET_JOB_CARDS_BY_VEHICLE)
-
-    public ResponseEntity<ApiResponse<List<JobCardResponse>>> getJobCardsByVehicle(@PathVariable Long vehicleId) {
+       @GetMapping(JobCardApiConstants.GET_JOB_CARDS_BY_VEHICLE)
+       public ResponseEntity<ApiResponse<List<JobCardResponse>>> getJobCardsByVehicle(
+        @PathVariable("vehicleId") Long vehicleId) {
         List<JobCardResponse> responses = jobCardService.getJobCardsByVehicleId(vehicleId);
         return ResponseEntity.ok(ApiResponse.<List<JobCardResponse>>builder()
                 .success(true)
@@ -83,8 +81,8 @@ public class JobCardController {
     }
 
     @GetMapping(JobCardApiConstants.GET_JOB_CARDS_BY_MERCHANT)
-
-    public ResponseEntity<ApiResponse<List<JobCardResponse>>> getJobCardsByMerchant(@PathVariable Long merchantId) {
+    public ResponseEntity<ApiResponse<List<JobCardResponse>>> getJobCardsByMerchant(
+        @PathVariable("merchantId") Long merchantId) {
         List<JobCardResponse> responses = jobCardService.getJobCardsByMerchantId(merchantId);
         return ResponseEntity.ok(ApiResponse.<List<JobCardResponse>>builder()
                 .success(true)
@@ -94,9 +92,8 @@ public class JobCardController {
     }
 
     @PutMapping(JobCardApiConstants.UPDATE_JOB_CARD)
-
-    public ResponseEntity<ApiResponse<JobCardResponse>> updateJobCard(
-            @PathVariable Long jobCardId,
+public ResponseEntity<ApiResponse<JobCardResponse>> updateJobCard(
+        @PathVariable("jobCardId") Long jobCardId,
             @Valid @RequestBody UpdateJobCardRequest request) {
         JobCardResponse updated = jobCardService.updateJobCard(jobCardId, request);
         return ResponseEntity.ok(ApiResponse.<JobCardResponse>builder()
@@ -106,9 +103,9 @@ public class JobCardController {
                 .build());
     }
 
-    @DeleteMapping(JobCardApiConstants.DELETE_JOB_CARD)
-
-    public ResponseEntity<ApiResponse<Object>> deleteJobCard(@PathVariable Long jobCardId) {
+   @DeleteMapping(JobCardApiConstants.DELETE_JOB_CARD)
+public ResponseEntity<ApiResponse<Object>> deleteJobCard(
+        @PathVariable("jobCardId") Long jobCardId) {
         jobCardService.deleteJobCard(jobCardId);
         return ResponseEntity.ok(ApiResponse.builder()
                 .success(true)
